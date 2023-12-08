@@ -68,7 +68,7 @@ To run the React Booking Application locally, follow these steps:
 
 1. Clone the repository.
 2. Install dependencies using `npm install`.
-3. Start the development server using `npm start`.
+3. Start the development server using `npm run dev`.
 
 Feel free to explore the codebase, contribute to the project, and make it even better!
 
