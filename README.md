@@ -4,7 +4,7 @@
 
 Welcome to the React Booking Application! This web application allows users to manage property bookings efficiently. It was developed as part of a technical test for a senior React developer position. The application is built using React 18, Node 20, TypeScript, and Sass.
 
-![Application Preview](path/to/your/image.png)
+![Application Preview](docs/home-desktop.png)
 
 ## Features
 
@@ -45,8 +45,8 @@ The webpages are designed to be fully responsive, providing a seamless experienc
 
 ## Prototype and Demo
 
-- [Prototype](link-to-prototype)
-- [Demo](link-to-demo)
+- [Prototype](https://www.figma.com/file/bjNprSTqV2YWBYemPHkJAH/Hostfully-Challenge?type=design&node-id=70-1539&mode=design)
+- [Demo](https://hostfully-challenge.netlify.app/)
 
 ## Next Steps
 
