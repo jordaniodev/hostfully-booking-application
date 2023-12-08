@@ -4,7 +4,7 @@ export interface InputProps {
     placeholder?: string;
     icon?: ReactElement;
     label?: string;
-    onChange?: (event: InputEvent) => void;
+    onChange?: (event: any) => void;
     min?:string;
     max?:string;
     type?: 'email' | 'text' | 'date';

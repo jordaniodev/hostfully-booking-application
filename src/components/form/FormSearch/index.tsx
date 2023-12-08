@@ -13,8 +13,8 @@ export const FormSearch = () => {
     setMinValue(dateDepart);
     const parts = dateDepart.split("-");
     const year = parseInt(parts[0]);
-    const day = parseInt(parts[1]);
-    const month = parseInt(parts[2]) - 1; 
+    const day = parseInt(parts[2]);
+    const month = parseInt(parts[1]) - 1; 
 
     const date = new Date(year, month, day);
     const monthName = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(date);
@@ -38,6 +38,7 @@ export const FormSearch = () => {
         type="date"
         onChange={(event: any) => selectDepart(event.target.value)}
         max={maxValue}
+        min={new Date().toISOString().split("T")[0]}
       />
       <Input
         label="Return"

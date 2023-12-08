@@ -23,6 +23,7 @@ export function BookingsProvider({ children }: BookingProviderProps) {
   }, []);
 
   async function createBooking(BookingInput: BookingInput) {
+    console.log(month);
     const Booking = {
       ...BookingInput,
       year,
