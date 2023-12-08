@@ -16,11 +16,7 @@ Users can easily create a new booking by selecting a start and end date for thei
 
 View and retrieve information about existing bookings, including details such as start and end dates.
 
-### 3. Update a Booking
-
-Modify the details of an existing booking, such as adjusting the start or end date.
-
-### 4. Delete a Booking
+### 3. Delete a Booking
 
 Remove a booking from the system when it's no longer needed.
 
