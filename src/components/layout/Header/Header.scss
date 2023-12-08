@@ -1,0 +1,83 @@
+@import "./../../../styles/variables";
+header{
+    width: 100%;
+    .container{
+        height: 90px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 0 3rem;
+    }
+    
+    .logo{
+        position: absolute;
+        left: 50%;
+        margin-left: -55px;
+    }
+    ul {
+        list-style: none;
+        display: flex;
+        height: 90px;
+        gap: 2rem;
+        
+        @media (max-width: 500px) { 
+            display: none;
+        }
+        
+        li {
+            height: 90px;
+            box-sizing: border-box;
+            cursor: pointer;
+            display: flex;
+            gap: 4px;
+            align-items: center;
+            flex-wrap: nowrap;
+
+            &.selected {
+                border-bottom: 5px solid $blue-primary;
+            }
+
+            span {
+                @media (max-width: 900px) { 
+                    display: none;
+                }
+            }
+        }
+    }
+
+    .container-login{
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        a{
+            all: unset;
+            color: $blue-primary;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+        }
+
+        @media (max-width: 500px) { 
+            display: none;
+        }
+
+        @media (max-width: 900px) { 
+                display: none;
+        }
+
+        
+
+        &.mobile {
+            display: none;
+            @media (max-width: 900px) { 
+                display: inherit;
+            }
+            @media (max-width: 500px) { 
+                display: none;
+            }
+        }
+    }
+}

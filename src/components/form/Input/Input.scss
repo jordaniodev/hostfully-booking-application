@@ -1,0 +1,49 @@
+.container-input{
+    position: relative;
+    width: 100%;
+    &:has(label) {
+        padding-top: 12px;
+    }
+    input {
+        all: unset;
+        padding: 1rem;
+        box-sizing: border-box;
+        border-radius: 4px;
+        width: 100%;
+        height: 56px;
+        background-color: #ffffff;
+    
+        &.outlined {
+            border: 1px solid #79747E;
+        }
+
+        &:disabled {
+            background-color: #eeecec;
+        }
+    
+    }
+
+    
+    label {
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        background-color: #ffffff;
+        padding: 0 2px;
+        position: absolute;
+        top: 2px;
+        left: 8px;
+    }
+
+    &:has(img) {
+        input{
+            padding-right: 44px;
+        }
+    }
+    img{
+        position: absolute;
+        top: 30px;
+        right: 16px;
+    }
+}

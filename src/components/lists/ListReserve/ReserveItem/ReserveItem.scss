@@ -1,0 +1,67 @@
+@import "../../../../styles/variables";
+
+.info{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    p{
+        font-size: 1rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+    }
+}
+.room{
+    width: 48px;
+    height: 48px;
+    border-radius: 4px;
+}
+.item{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba($green-dark, 0.25);
+    gap: 1rem;
+
+    .action{
+        display: flex;
+        align-items: center;
+        gap: 64px;
+
+        .date {
+            font-size: 1.5rem;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            
+            .year {
+                font-size: 0.875rem;
+                font-style: normal;
+                font-weight: 600;
+                line-height: normal;
+            }
+
+            @media (max-width:900px){
+                display: none;
+            }
+        }
+    }
+}
+
+.container-button{
+    &-desk{
+        @media (max-width:630px){
+            display: none;
+        }
+        display: flex;
+        flex-wrap: nowrap;
+    }
+    &-mobile{
+        display: none;
+
+        @media (max-width:630px){
+            display: inherit;
+        }
+    }
+}

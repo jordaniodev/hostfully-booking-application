@@ -1,0 +1,20 @@
+.container-form-filter{
+    padding: 1.5rem;
+    box-shadow: 0px 4px 16px 0px rgba(17, 34, 17, 0.05);
+    margin-top: 45px;
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 64px;
+    gap: 1rem;
+    align-items: flex-end;
+    
+    @media (max-width: 800px) {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 64px;
+
+    }
+    .container-button{
+        display: flex;
+        justify-content: flex-end;
+    }
+}

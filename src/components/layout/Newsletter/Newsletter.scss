@@ -1,0 +1,60 @@
+@import "./../../../styles/variables";
+
+.newsletter{
+    margin-top: 3rem;
+    background-color: $green-tertiary;
+    padding: 0 1.5rem;
+    border-radius: 20px;
+    min-height: 300px;
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+
+    .container-text{
+        max-width: 600px;
+
+        @media (max-width: 900px) { 
+            max-width: 900px;
+        }
+
+        padding: 1.5rem 0;
+
+        h2 {
+            font-size: 44px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 54px;
+            max-width: 364px;
+            margin-bottom: 1.5rem;
+        }
+
+        p {
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+            margin-bottom: .5rem;
+            &.bold {
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+            }
+        }
+
+        form{
+            display: flex;
+            gap: .5rem;
+            
+            @media (max-width: 500px) { 
+                flex-direction: column;
+            }
+        }
+    }
+
+    .newSletterImage{
+        @media (max-width: 900px) { 
+            display: none;
+        }
+    }
+}
