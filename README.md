@@ -33,8 +33,7 @@ Remove a booking from the system when it's no longer needed.
 
 ## Global State Management
 
-The application utilizes a global state store to manage the state of bookings. The specific global state management library used is of your choice.
-
+The application utilizes a global state store to manage the state of bookings.
 ## Validation & User Experience
 
 To enhance user experience, the application incorporates logic to prevent double bookings (overlapping reservations). Additionally, the start and end dates for each booking are validated to ensure accuracy.
