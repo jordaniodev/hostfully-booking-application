@@ -72,7 +72,7 @@ To run the React Booking Application locally, follow these steps:
 
 Feel free to explore the codebase, contribute to the project, and make it even better!
 
-Thank you for taking the time to complete this test, and best of luck with your application!
+Thank you for taking the time to see this test!
 
 ---
 
