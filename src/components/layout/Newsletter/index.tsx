@@ -1,23 +1,24 @@
 import { Button } from '../../buttons/Button';
 import { Input } from './../../form/Input/index';
-import './Newsletter.scss';
 import newSletterImage from './../../../assets/img/newsletter.svg';
+import { Container } from '../Container/Container.style';
+import { ContainerTextNewsletter, FormNewsletter, ImageNewSletter, NewsletterCustom, ParagraphNewsletter, SubTitleNewsletter } from './Newsletter.style';
 
 export const Newsletter = () => {
     return <>
-        <div className="container">
-            <div className="newsletter">
-                <div className="container-text">
-                    <h2>Subscribe Newsletter</h2>
-                    <p className="bold">The Travel</p>
-                    <p>Get inspired! Receive travel discounts, tips and behind the scenes stories.</p>
-                    <form action="">
-                        <Input placeholder={'Your email address'} type='text' />
+        <Container>
+            <NewsletterCustom>
+                <ContainerTextNewsletter>
+                    <SubTitleNewsletter>Subscribe Newsletter</SubTitleNewsletter>
+                    <ParagraphNewsletter className='bold'>The Travel</ParagraphNewsletter>
+                    <ParagraphNewsletter>Get inspired! Receive travel discounts, tips and behind the scenes stories.</ParagraphNewsletter>
+                    <FormNewsletter>
+                        <Input name='newsletter' placeholder={'Your email address'} type='text' />
                         <Button type='submit' category='submit'>Subscribe</Button>
-                    </form>
-                </div>
-                <img src={newSletterImage} alt="" className='newSletterImage' />
-            </div>
-        </div>
+                    </FormNewsletter>
+                </ContainerTextNewsletter>
+                <ImageNewSletter src={newSletterImage} alt=""  />
+            </NewsletterCustom>
+        </Container>
     </>
 }

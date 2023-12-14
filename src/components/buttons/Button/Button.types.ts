@@ -1,13 +1,13 @@
-import { ReactElement } from 'react';
+import { ReactElement, ReactNode } from "react";
 
-export type ButtonProps  = {
+export interface ButtonProps{
     icon?: ReactElement;
     iconPosition?: 'left' | 'right';
     size?: 'small' | 'medium' | 'large';
-    children: string;
-    category?: 'filled' | 'outline' | 'submit' | 'buy' | 'dark' | 'danger'	;
-    fullWidth?: boolean;
-    alingCenter?: boolean;
+    category?: 'filled' | 'outline' | 'submit' | 'buy' | 'dark' | 'danger';
+    fullwidth?: number | boolean;
+    aligncenter?: number | boolean;
     onClick?: () => void;
+    children?: ReactNode;
     type?: 'button' | 'submit';
 }

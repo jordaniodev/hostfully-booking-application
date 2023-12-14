@@ -2,10 +2,14 @@ import { createContext, useContext, useEffect, useState } from "react";
 import {
   Booking,
   BookingContextData,
+  BookingDetail,
+  BookingFormData,
   BookingInput,
   BookingProviderProps,
 } from "./useBookings.types";
 import { BOOKINGS } from "./useBookings.data";
+import { useAlert } from 'react-bootstrap-hooks-alert';
+import { useHotel } from "../Hotels/useHotels";
 
 const BookingsContext = createContext<BookingContextData>(
   {} as BookingContextData
@@ -13,8 +17,9 @@ const BookingsContext = createContext<BookingContextData>(
 
 export function BookingsProvider({ children }: BookingProviderProps) {
   const [Bookings, setBookings] = useState<Booking[]>([]);
-  const [year, setYear] = useState<number>();
-  const [month, setMonth] = useState<string>();
+  const [formData, setFormData] = useState<BookingFormData>();
+  const { success, warning } = useAlert();
+  const { detailHotel } = useHotel();
 
   useEffect(() => {
     setTimeout(() => {
@@ -22,22 +27,19 @@ export function BookingsProvider({ children }: BookingProviderProps) {
     }, 500);
   }, []);
 
-  async function createBooking(BookingInput: BookingInput) {
-    console.log(month);
-    const Booking = {
-      ...BookingInput,
-      year,
-      month,
-      id: Date.now(),
-    } as Booking;
-    setBookings([...Bookings, Booking]);
-    if (year && month) {
-      alert("Booking created successfully");
+  async function createBooking({hotelId}: BookingInput) {
+    if(formData) {
+      const Booking = {
+        hotelId,
+        ...formData,
+        id: Date.now(),
+      } as Booking;
+  
+      setBookings([...Bookings, Booking]);
 
-      const reservationElement = document.getElementById('reservation')?.offsetTop;
-      window.scrollTo(0, reservationElement!);
-    } else {
-      alert("You need provider a month and year for your travel");
+      success('Bookings created successfully');
+    }else{
+      warning("You need provider a month and year for your travel");
     }
   }
 
@@ -51,13 +53,24 @@ export function BookingsProvider({ children }: BookingProviderProps) {
   }
 
   async function detailBooking(idBooking: number) {
-    return await new Promise<Booking>((resolve) => {
+    const book =  await new Promise<Booking>((resolve) => {
       setTimeout(() => {
         resolve(
           Bookings.find((booking) => booking.id === idBooking) as Booking
         );
       }, 500);
     });
+
+    const hotel = detailHotel(book.hotelId);
+
+    return {
+      hotel,
+      book
+    } as BookingDetail
+  }
+
+  async function updateBooking(idBooking: number, bookingData: Booking) {
+    
   }
 
   return (
@@ -67,10 +80,9 @@ export function BookingsProvider({ children }: BookingProviderProps) {
         createBooking,
         deleteBooking,
         detailBooking,
-        setYear,
-        setMonth,
-        year,
-        month
+        updateBooking,
+        setFormData,
+        formData
       }}
     >
       {children}

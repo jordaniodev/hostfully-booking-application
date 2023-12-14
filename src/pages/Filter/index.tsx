@@ -1,23 +1,41 @@
-import { Button } from "../../components/buttons/Button";
 import { FormSearch } from "../../components/form/FormSearch";
 import { Layout } from "../../components/layout/Layout";
-import searchIcon from './../../assets/img/icons/search-white.svg'
-import './Filter.scss'
+import { Container } from "./../../components/layout/Container/Container.style";
+import {
+  ContainerItems,
+  TwoColumnsFilter,
+} from "./Filter.style";
+import { FormFilter } from "../../components/form/FormFilter";
+import { ListCardHotel } from "../../components/cards/ListCardHotel";
+import { useBooking } from "../../hooks/Bookings/useBookings";
+import { useNavigate } from "react-router-dom";
 export default function Filter() {
-    return <>
-        <Layout>
-            <main>
-                <div className="container">
-                    <div className="container-form-filter">
-                        <div className="form">
-                            <FormSearch />
-                        </div>
-                        <div className="container-button">
-                            <Button icon={<img src={searchIcon} />} category="filled" iconPosition="left"> </Button>
-                        </div>
-                    </div>
-                </div>
-            </main>
-        </Layout>
+  const { formData } = useBooking();
+  const navigate = useNavigate();
+
+  if(!formData?.city){
+    navigate("/");
+  }
+  return (
+    <>
+      <Layout>
+        <main>
+          <Container>
+            <FormSearch />
+          </Container>
+          <section>
+            <Container>
+              <TwoColumnsFilter>
+                <FormFilter />
+                <ContainerItems>
+                  
+                  <ListCardHotel />
+                </ContainerItems>
+              </TwoColumnsFilter>
+            </Container>
+          </section>
+        </main>
+      </Layout>
     </>
+  );
 }

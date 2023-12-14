@@ -1,13 +1,13 @@
 import { ReactElement } from "react";
+import { FormControlProps } from "react-bootstrap";
 
-export interface InputProps {
-    placeholder?: string;
-    icon?: ReactElement;
+export interface InputProps extends FormControlProps {
     label?: string;
-    onChange?: (event: any) => void;
-    min?:string;
-    max?:string;
-    type?: 'email' | 'text' | 'date';
+    icon?: ReactElement;
+    min?: string;
+    name?: string;
+    required?: boolean;
+    max?: string;
+    type?: 'email' | 'text' | 'date' | 'number';
     category?: 'slim' | 'outlined';
-    value?: string;
 }

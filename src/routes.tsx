@@ -9,7 +9,7 @@ export const ROUTES = createBrowserRouter([
     element: <Home />
   },
   {
-    path: "/booking",
+    path: "/booking-detail/:id",
     element: <BookingDetail />
   },
   {

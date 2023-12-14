@@ -1,20 +1,22 @@
-import { Booking } from "./useBookings.types";
+import { Booking, BookingDetail } from "./useBookings.types";
 
 export const BOOKINGS: Booking[] = [
   {
     id: 1,
-    amount: 800,
-    imageUrl: '/assets/img/cards/paris.jpeg',
-    title: 'London',
-    month: 'January',
-    year: 2024
+    adults: 2,
+    checkIn: "2020-02-02",
+    checkOut: "2020-02-04",
+    city: "Paris",
+    hotelId: 1,
+    kids: 0,
   },
   {
-    id: 2,
-    amount: 850,
-    imageUrl: '/assets/img/cards/paris.jpeg',
-    title: 'London',
-    month: 'February',
-    year: 2024
+    id: 1,
+    adults: 1,
+    checkIn: "2020-02-02",
+    checkOut: "2020-02-04",
+    city: "Paris",
+    hotelId: 3,
+    kids: 2,
   },
 ];

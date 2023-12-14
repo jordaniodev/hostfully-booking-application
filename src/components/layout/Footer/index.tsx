@@ -1,8 +1,10 @@
 import Logo from "./../../../assets/img/logo.png";
-import './Footer.scss'
+import { FooterCustom } from "./Footer.style";
 
 export const Footer = () => {
-    return <footer>
-        <img src={Logo} alt="" />
-    </footer>
-}
+  return (
+    <FooterCustom>
+      <img src={Logo} alt="" />
+    </FooterCustom>
+  );
+};

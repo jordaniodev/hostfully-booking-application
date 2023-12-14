@@ -1,10 +1,11 @@
 import { Card } from "../Card";
 import { ListCardProps } from "./ListCard.types";
-import './ListCard.scss'
+import { ContainerCards } from "./ListCard.style";
+import { Container } from "../../layout/Container/Container.style";
 export const ListCard = ({ cards }: ListCardProps) => {
   return (
-    <div className="container">
-      <div className="containerCards">
+    <Container>
+      <ContainerCards>
         {cards.map((card) => {
           return (
             <Card
@@ -15,7 +16,7 @@ export const ListCard = ({ cards }: ListCardProps) => {
             />
           );
         })}
-      </div>
-    </div>
+      </ContainerCards>
+    </Container>
   );
 };

@@ -1,23 +1,30 @@
+import ButtonCustom from "./Button.style";
 import { ButtonProps } from "./Button.types";
-import "./Button.scss";
-
 export const Button = ({
   category = "outline",
-  children,
-  fullWidth,
-  size = 'large',
+  fullwidth,
+  size = "large",
+  children = ' ',
   icon,
-  iconPosition,
-  type = 'button',
-  alingCenter,
+  iconPosition = 'left',
+  type = "button",
+  aligncenter,
   onClick,
   ...props
 }: ButtonProps) => {
   return (
-    <button onClick={onClick} {...props} className={`btn ${category} ${alingCenter ? "alingCenter" : ""} ${fullWidth ? "fullWidth" : ""} ${size}`} type={type}>
+    <ButtonCustom
+      onClick={onClick}
+      fullwidth={fullwidth ? 1 : 0}
+      size={size}
+      category={category}
+      aligncenter={aligncenter ? 1 : 0}
+      type={type}
+      {...props}
+    >
       {iconPosition === "left" && icon}
       {children}
       {iconPosition === "right" && icon}
-    </button>
+    </ButtonCustom>
   );
 };

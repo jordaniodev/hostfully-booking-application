@@ -1,22 +1,41 @@
+import { useRef } from "react";
 import { InputProps } from "./Input.types";
-import "./Input.scss";
+import { InputGroup } from "react-bootstrap";
+import { InputCustom, InputGroupIcon, LabelCustom } from "./Input.style";
 
 export const Input = ({
   label,
-  placeholder,
-  type = "text",
   icon,
-  value,
-  min,
-  max,
-  onChange,
-  category = 'slim',
+  required,
+  name,
+  category = "slim",
+  id,
+  ...props
 }: InputProps) => {
+  const inputForm = useRef<HTMLInputElement>();
   return (
-    <div className="container-input">
-      {label ? <label> {label} </label> : ""}
-      <input onChange={onChange} type={type} placeholder={placeholder} className={category} min={min} max={max} value={value} />
-      {icon ? icon : ""}
-    </div>
+    <InputGroup>
+      {label ? <LabelCustom htmlFor={id}>{label}</LabelCustom> : ""}
+      <InputCustom
+        id={id}
+        aria-label={label}
+        required={required}
+        icon={icon}
+        category={category}
+        name={name}
+        aria-describedby="basic-addon1"
+        {...props}
+        ref={inputForm}
+      />
+      {icon && (
+        <InputGroupIcon
+          onClick={() => inputForm?.current?.focus()}
+          category={category}
+          id="basic-addon1"
+        >
+          {icon}
+        </InputGroupIcon>
+      )}
+    </InputGroup>
   );
 };
