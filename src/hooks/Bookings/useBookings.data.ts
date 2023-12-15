@@ -1,4 +1,4 @@
-import { Booking, BookingDetail } from "./useBookings.types";
+import { Booking } from "./useBookings.types";
 
 export const BOOKINGS: Booking[] = [
   {
@@ -11,7 +11,7 @@ export const BOOKINGS: Booking[] = [
     kids: 0,
   },
   {
-    id: 1,
+    id: 2,
     adults: 1,
     checkIn: "2020-02-02",
     checkOut: "2020-02-04",

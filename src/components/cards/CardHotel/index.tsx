@@ -15,15 +15,35 @@ import pinBlueIcon from "./../../../assets/img/icons/pin-blue.svg";
 import { Stars } from "../../stars/Stars";
 import { Button } from "../../buttons/Button";
 import { CardHotelProps } from "./CardHotel.types";
+import { useNavigate } from "react-router-dom";
+import { useAlert } from "react-bootstrap-hooks-alert";
 
 export const CardHotel = ({
-  card: { id, imageUrl, name, price, address, mark, quantityReviews, quantityStar },
+  card: {
+    id,
+    imageUrl,
+    name,
+    price,
+    address,
+    mark,
+    quantityReviews,
+    quantityStar,
+  },
 }: CardHotelProps) => {
   const { createBooking } = useBooking();
+  const navigate = useNavigate();
+  const { success, danger } = useAlert();
 
   const onCreateBooking = () => {
-    createBooking({hotelId : id});
-  }
+    try {
+      const idCreated = createBooking({ hotelId: id });
+      success("Bookings created successfully");
+      navigate(`/booking-detail/${idCreated}`);
+    } catch (err) {
+      danger("Something went wrong, please try again");
+    }
+  };
+
   const getMarkByValue = (value: number) => {
     const thresholds = [
       { limit: 1, mark: "Very bad" },
@@ -45,7 +65,7 @@ export const CardHotel = ({
   return (
     <>
       <CardCustom>
-        <ImageCardCustom variant="left" src={imageUrl} />
+        <ImageCardCustom variant="left" src={imageUrl} alt={name} />
         <Card.Body>
           <TitleCardCustom>
             <h3>{name}</h3>
@@ -72,7 +92,12 @@ export const CardHotel = ({
             </NoteContainer>
           </Card.Text>
           <CardFooterCustom>
-            <Button category="filled" fullwidth={true} aligncenter onClick={() => onCreateBooking()}>
+            <Button
+              category="filled"
+              fullwidth={true}
+              aligncenter
+              onClick={() => onCreateBooking()}
+            >
               Book Hotel
             </Button>
           </CardFooterCustom>

@@ -8,7 +8,7 @@ import {
   BookingProviderProps,
 } from "./useBookings.types";
 import { BOOKINGS } from "./useBookings.data";
-import { useAlert } from 'react-bootstrap-hooks-alert';
+import { useAlert } from "react-bootstrap-hooks-alert";
 import { useHotel } from "../Hotels/useHotels";
 
 const BookingsContext = createContext<BookingContextData>(
@@ -16,31 +16,42 @@ const BookingsContext = createContext<BookingContextData>(
 );
 
 export function BookingsProvider({ children }: BookingProviderProps) {
-  const [Bookings, setBookings] = useState<Booking[]>([]);
   const [formData, setFormData] = useState<BookingFormData>();
-  const { success, warning } = useAlert();
+  const { warning } = useAlert();
   const { detailHotel } = useHotel();
+  const STORAGE_KEY = "HOSTFULLY_BOOKINGS";
+  const storageBooking = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '{}');
+  const [Bookings, setBookings] = useState<Booking[]>(storageBooking);
+
 
   useEffect(() => {
-    setTimeout(() => {
-      setBookings(BOOKINGS);
-    }, 500);
-  }, []);
+    if(!Object.keys(storageBooking).length){
+       setBookings(BOOKINGS)
+       saveStorageBookings(BOOKINGS)
+      };
+  },[]);
 
-  async function createBooking({hotelId}: BookingInput) {
-    if(formData) {
+  function saveStorageBookings(bookings: Booking[]) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(bookings));
+  }
+
+  function createBooking({ hotelId }: BookingInput) {
+    const id = Date.now();
+
+    if (formData) {
       const Booking = {
         hotelId,
         ...formData,
-        id: Date.now(),
+        id,
       } as Booking;
-  
-      setBookings([...Bookings, Booking]);
-
-      success('Bookings created successfully');
-    }else{
+      const newBookings = [...Bookings, Booking];
+      setBookings(newBookings);
+      saveStorageBookings(newBookings)
+    } else {
       warning("You need provider a month and year for your travel");
     }
+
+    return id;
   }
 
   async function deleteBooking(idBooking: number) {
@@ -49,28 +60,39 @@ export function BookingsProvider({ children }: BookingProviderProps) {
         (booking) => booking.id !== idBooking
       );
       setBookings([...newBookings]);
+      saveStorageBookings([...newBookings])
     }, 500);
   }
 
   async function detailBooking(idBooking: number) {
-    const book =  await new Promise<Booking>((resolve) => {
-      setTimeout(() => {
+    const book = await new Promise<Booking>((resolve) => {
         resolve(
           Bookings.find((booking) => booking.id === idBooking) as Booking
         );
-      }, 500);
     });
-
     const hotel = detailHotel(book.hotelId);
-
     return {
       hotel,
-      book
-    } as BookingDetail
+      book,
+    } as BookingDetail;
   }
 
-  async function updateBooking(idBooking: number, bookingData: Booking) {
-    
+  async function updateBooking(idBooking: number, bookingData: BookingFormData) {
+      const newBookings = Bookings.map((booking) => {
+        if(booking.id === idBooking){
+          return {
+            ...booking,
+            adults: bookingData.adults,
+            kids: bookingData.kids,
+            checkIn: bookingData.checkIn,
+            checkOut: bookingData.checkOut
+          }
+        }
+        return booking;
+      }) as Booking[];
+      
+      setBookings([...newBookings]);
+      saveStorageBookings([...newBookings])
   }
 
   return (
@@ -82,7 +104,7 @@ export function BookingsProvider({ children }: BookingProviderProps) {
         detailBooking,
         updateBooking,
         setFormData,
-        formData
+        formData,
       }}
     >
       {children}

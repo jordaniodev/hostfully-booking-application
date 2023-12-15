@@ -1,5 +1,4 @@
-import flyIcon from "./../../../assets/img/icons/fly.svg";
-import { FormEventHandler, useRef, useState } from "react";
+import { FormEventHandler, useEffect, useRef, useState } from "react";
 import { Input } from "../Input";
 import { useBooking } from "../../../hooks/Bookings/useBookings";
 import {
@@ -11,46 +10,49 @@ import {
 import { InputGoogleMaps } from "../InputGoogleMaps";
 import { Button } from "../../buttons/Button";
 import Form from "react-bootstrap/Form";
+import { FormSerachEditProps } from "./FomrSearchEdit.types";
+import {  BookingDetail } from "../../../hooks/Bookings/useBookings.types";
 import { useAlert } from "react-bootstrap-hooks-alert";
 
-export const FormSearchEdit = () => {
+export const FormSearchEdit = ({ idBooking, wasEddited}: FormSerachEditProps) => {
   const [minValue, setMinValue] = useState<string>();
   const [maxValue, setMaxValue] = useState<string>();
-  const { setMonth, setYear } = useBooking();
-  const { success, info } = useAlert()
-
+  const { updateBooking,  detailBooking } = useBooking();
   const formReference = useRef<HTMLFormElement>(null);
+  const [bookingData, setBookingData] = useState<BookingDetail>();
+  const { danger } = useAlert();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const detail = await detailBooking(idBooking);
+        setBookingData(detail);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, []);
 
   const submitValue: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
     if (formReference.current) {
-      const formData = new FormData(event.currentTarget);
-
-      const checkinValue = formData.get("checkin") as string;
-      const checkoutValue = formData.get("checkout") as string;
-      const adultsValue = formData.get("adults") as string;
-      const kidsValue = formData.get("kids") as string;
-
-      success(`Checkin ${checkinValue}`);
-      console.log("Checkout:", checkoutValue);
-      console.log("Adults:", adultsValue);
-      console.log("Kids:", kidsValue);
+      const formDataValue = new FormData(event.currentTarget);
+      const checkIn = formDataValue.get("checkin") as string;
+      const checkOut = formDataValue.get("checkout") as string;
+      const adults = parseInt(formDataValue.get("adults") as string);
+      const kids = parseInt(formDataValue.get("kids") as string);
+      const city = formDataValue.get("city") as string;
+      if(kids + adults === 0){
+        danger(' Please select a number to kids and adults');
+      }else{
+        updateBooking(idBooking, { checkIn, checkOut, adults, kids, city });
+        wasEddited();
+      }
     }
   };
 
   const selectDepart = (dateDepart: string) => {
     setMinValue(dateDepart);
-    const parts = dateDepart.split("-");
-    const year = parseInt(parts[0]);
-    const day = parseInt(parts[2]);
-    const month = parseInt(parts[1]) - 1;
-
-    const date = new Date(year, month, day);
-    const monthName = new Intl.DateTimeFormat("en-US", {
-      month: "long",
-    }).format(date);
-    setMonth(monthName);
-    setYear(year);
   };
 
   const selectReturn = (value: string) => {
@@ -58,18 +60,20 @@ export const FormSearchEdit = () => {
   };
   return (
     <BoxFilter>
-      <h3>Where are you flying? </h3>
+      <h3>Update your Booking </h3>
       <Form ref={formReference} onSubmit={submitValue}>
         <FormContainer>
           <InputGoogleMaps
-            name="place"
-            onSelectOption={(option) => console.log(option)}
+            name="city"
+            required={true}
+            defaultValue={bookingData?.book.city}
           />
           <Input
             required={true}
             label="Checkin"
             name="checkin"
             category="outlined"
+            defaultValue={bookingData?.book.checkIn}
             type="date"
             onChange={(event: any) => selectDepart(event.target.value)}
             max={maxValue}
@@ -80,35 +84,35 @@ export const FormSearchEdit = () => {
             label="Checkout"
             name="checkout"
             category="outlined"
+            defaultValue={bookingData?.book.checkOut}
             type="date"
             min={minValue}
             onChange={(event: any) => selectReturn(event.target.value)}
           />
           <ContainerPerson>
             <Input
+              required={true}
               name="adults"
               label="Adults"
               type="number"
               category="outlined"
               min="0"
+              defaultValue={bookingData?.book.adults}
             />
             <Input
+              required={true}
               name="kids"
               min="0"
               label="Kids"
               type="number"
+              defaultValue={bookingData?.book.kids}
               category="outlined"
             />
           </ContainerPerson>
         </FormContainer>
         <FooterFilter>
-          <Button
-            type="submit"
-            icon={<img src={flyIcon} />}
-            iconPosition="left"
-            category="filled"
-          >
-            Show Filghts
+          <Button type="submit" iconPosition="left" category="filled">
+            Update Booking
           </Button>
         </FooterFilter>
       </Form>

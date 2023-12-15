@@ -6,8 +6,8 @@ import { StarsProps } from "./Stars.types";
 export const Stars = ({quantityStar}: StarsProps) => {
   return (
     <StartContainer>
-      {Array(quantityStar).fill('').map(_ => <img src={startFilledIcon} alt="" />)}
-      {Array(5 - quantityStar).fill('').map(_ => <img src={startOutlinedIcon} alt="" />)}
+      {Array(quantityStar).fill('').map((_, index) => <img key={index} src={startFilledIcon} alt="Star Filled" />)}
+      {Array(5 - quantityStar).fill('').map((_, index) => <img key={index} src={startOutlinedIcon} alt="Star Outlined" />)}
       <span> {quantityStar} Stars Hotel </span>
     </StartContainer>
   );

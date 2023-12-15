@@ -28,7 +28,6 @@ export default function Filter() {
               <TwoColumnsFilter>
                 <FormFilter />
                 <ContainerItems>
-                  
                   <ListCardHotel />
                 </ContainerItems>
               </TwoColumnsFilter>

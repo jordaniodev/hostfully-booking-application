@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Input } from "../Input";
 import pinIcon from "./../../../assets/img/icons/pin.svg";
 import searchIcon from "./../../../assets/img/icons/search.svg";
@@ -8,13 +8,13 @@ import {
   OptionText,
   Options,
 } from "./InputGoogleMaps.style";
-import { GoogleMapsItems, InputGoogleMapsProps } from "./InputGoogleMaps.type";
+import { GoogleMapsItems } from "./InputGoogleMaps.type";
+import { InputProps } from "../Input/Input.types";
 
 export const InputGoogleMaps = ({
-  onSelectOption,
   name,
   defaultValue,
-}: InputGoogleMapsProps) => {
+}: InputProps) => {
   const [autocompleteResults, setAutocompleteResults] =
     useState<GoogleMapsItems[]>();
   const [searchTerm, setSearchTerm] = useState("");
@@ -24,7 +24,7 @@ export const InputGoogleMaps = ({
 
   const handleInputChange = (value: string) => {
     setSearchTerm(value);
-
+    if(value ==='') setSearchTerm(' ');
     fetch(apiUrl(value))
       .then((response) => response.json())
       .then((data) => {
@@ -39,7 +39,7 @@ export const InputGoogleMaps = ({
     setSearchTerm(optionSelected);
     setAutocompleteResults([]);
   };
-
+  
   return (
     <ContainerInputGoogleMaps>
       <Input
@@ -49,7 +49,8 @@ export const InputGoogleMaps = ({
         name={name}
         icon={<img src={searchIcon} alt="search" />}
         category="outlined"
-        value={(searchTerm) ? searchTerm : defaultValue}
+        defaultValue={defaultValue}
+        value={((searchTerm) ? searchTerm : defaultValue) as string}
         id="choice-place"
         onChange={(e) => handleInputChange(e.target.value)}
       />

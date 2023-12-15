@@ -21,10 +21,10 @@ export interface BookingDetail {
 
 export interface BookingContextData {
   Bookings: Booking[];
-  createBooking: (Booking: BookingInput) => Promise<void>;
+  createBooking: (Booking: BookingInput) => number;
   deleteBooking: (idBooking: number) => Promise<void>;
   detailBooking: (idBooking: number) => Promise<BookingDetail>;
-  updateBooking: (idBooking: number, bookingData: Booking) => void;
+  updateBooking: (idBooking: number, bookingData: BookingFormData) => void;
   setFormData: (formData?: BookingFormData) => void;
   formData?: BookingFormData;
 }

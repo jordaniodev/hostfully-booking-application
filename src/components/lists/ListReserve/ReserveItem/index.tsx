@@ -14,7 +14,7 @@ import {
 import { BookingDetail } from "../../../../hooks/Bookings/useBookings.types";
 import { useNavigate } from "react-router-dom";
 export const ReserveItem = ({ idReserve }: ReserveItemProps) => {
-  const { deleteBooking, detailBooking } = useBooking();
+  const { detailBooking } = useBooking();
   const navigate = useNavigate();
   const [reserve, setReserve] = useState<BookingDetail>();
 
@@ -24,7 +24,6 @@ export const ReserveItem = ({ idReserve }: ReserveItemProps) => {
 
   
   useEffect(() => {
-    // declare the data fetching function
     const fetchData = async () => {
       return  await detailBooking(idReserve);
     }

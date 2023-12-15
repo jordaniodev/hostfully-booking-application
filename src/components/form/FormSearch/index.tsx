@@ -1,4 +1,3 @@
-import flyIcon from "./../../../assets/img/icons/fly.svg";
 import { FormEventHandler, useRef, useState } from "react";
 import { Input } from "../Input";
 import { useBooking } from "../../../hooks/Bookings/useBookings";
@@ -11,14 +10,15 @@ import {
 import { InputGoogleMaps } from "../InputGoogleMaps";
 import { Button } from "../../buttons/Button";
 import Form from "react-bootstrap/Form";
-import { useAlert } from "react-bootstrap-hooks-alert";
 import { useNavigate } from "react-router-dom";
+import { useAlert } from "react-bootstrap-hooks-alert";
 
 export const FormSearch = () => {
   const [minValue, setMinValue] = useState<string>();
   const [maxValue, setMaxValue] = useState<string>();
   const { setFormData, formData } = useBooking();
   const navigate = useNavigate();
+  const { danger } = useAlert();
   const formReference = useRef<HTMLFormElement>(null);
 
   const submitValue: FormEventHandler<HTMLFormElement> = (event) => {
@@ -27,28 +27,20 @@ export const FormSearch = () => {
       const formDataValue = new FormData(event.currentTarget);
       const checkIn = formDataValue.get("checkin") as string;
       const checkOut = formDataValue.get("checkout") as string;
-      const adults = formDataValue.get("adults") as string;
-      const kids = formDataValue.get("kids") as string;
+      const adults = parseInt(formDataValue.get("adults") as string);
+      const kids = parseInt(formDataValue.get("kids") as string);
       const city = formDataValue.get("city") as string;
-
-      setFormData({ checkIn, checkOut, adults, kids, city });
-      navigate("/filter");
+      if(kids + adults === 0){
+        danger(' Please select a number to kids and adults');
+      }else{
+        setFormData({ checkIn, checkOut, adults, kids, city });
+        navigate("/filter");
+      }
     }
   };
 
   const selectDepart = (dateDepart: string) => {
     setMinValue(dateDepart);
-    const parts = dateDepart.split("-");
-    const year = parseInt(parts[0]);
-    const day = parseInt(parts[2]);
-    const month = parseInt(parts[1]) - 1;
-
-    const date = new Date(year, month, day);
-    const monthName = new Intl.DateTimeFormat("en-US", {
-      month: "long",
-    }).format(date);
-    setMonth(monthName);
-    setYear(year);
   };
 
   const selectReturn = (value: string) => {
@@ -61,8 +53,7 @@ export const FormSearch = () => {
         <FormContainer>
           <InputGoogleMaps
             name="city"
-            onSelectOption={(option) => console.log(option)}
-            require
+            required={true}
             defaultValue={formData?.city}
           />
           <Input

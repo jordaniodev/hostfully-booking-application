@@ -1,7 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { Container } from "../Container/Container.style";
 import airPlaneIcon from "./../../../assets/img/icons/airplane.svg";
-import bedIcon from "./../../../assets/img/icons/bed.svg";
 import userIcon from "./../../../assets/img/icons/user.svg";
 import Logo from "./../../../assets/img/logo.png";
 import { Button } from "./../../buttons/Button/index";

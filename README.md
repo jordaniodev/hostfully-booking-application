@@ -2,7 +2,7 @@
 
 ## Overview
 
-Welcome to the React Booking Application! This web application allows users to manage property bookings efficiently. It was developed as part of a technical test for a senior React developer position. The application is built using React 18, Node 20, TypeScript, and Sass.
+Welcome to the React Booking Application! This web application allows users to manage property bookings efficiently. It was developed as part of a technical test for a senior React developer position. The application is built using React 18, Node 20, TypeScript, Jest, and Styled Components.
 
 ![Application Preview](docs/home-desktop.png)
 
@@ -30,6 +30,7 @@ Remove a booking from the system when it's no longer needed.
 - Node 20
 - TypeScript
 - Sass
+- Jest
 
 ## Global State Management
 
@@ -60,21 +61,23 @@ While the current version of the React Booking Application fulfills the basic re
 
 4. **Improved Styling**: Enhance the visual appeal of the application by refining the styling and incorporating modern design principles.
 
-5. **Testing**: Implement comprehensive testing to ensure the robustness and reliability of the application.
+6. **Filter**: Implement the filtering on the filter page.
 
-## Getting Started
+7. **More Tests**: Implement more comprehensive testing to ensure the robustness and reliability of the application.
 
-To run the React Booking Application locally, follow these steps:
+## Project Structure
 
-1. Clone the repository.
-2. Install dependencies using `npm install`.
-3. Start the development server using `npm start`.
+The project follows a well-organized and modular folder structure:
 
-Feel free to explore the codebase, contribute to the project, and make it even better!
+- `src/assets`: Static assets such as images and icons.
+  
+- `src/components`: Components are categorized and organized in subdirectories. Each component has its own directory containing `index.tsx` (main component file), `ComponentName.test.tsx` (test file), `ComponentName.style.tsx` (style file), and `ComponentName.types.tsx` (types file). This structure promotes reusability and a clear separation of responsibilities.
 
-Thank you for taking the time to complete this test, and best of luck with your application!
+- `src/hooks`: Custom hooks are organized in subdirectories with files such as `useHookName.data.ts` (data file), `useHookName.tsx` (hook file), and `useHookName.types.tsx` (types file). This organization keeps hooks self-contained and modular.
 
----
+- `src/pages`: Each page has its own directory for clear and organized structure. Subcomponents specific to a page can also be placed in the same directory.
+
+- `src/styles`: Global styles or style configuration files are kept in this directory for consistent styling across the application.
 
 ## Additional Questions
 

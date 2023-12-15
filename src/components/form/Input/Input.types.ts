@@ -7,6 +7,7 @@ export interface InputProps extends FormControlProps {
     min?: string;
     name?: string;
     required?: boolean;
+    placeholder?: string;
     max?: string;
     type?: 'email' | 'text' | 'date' | 'number';
     category?: 'slim' | 'outlined';
