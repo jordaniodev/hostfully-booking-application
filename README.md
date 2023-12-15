@@ -16,11 +16,7 @@ Users can easily create a new booking by selecting a start and end date for thei
 
 View and retrieve information about existing bookings, including details such as start and end dates.
 
-### 3. Update a Booking
-
-Modify the details of an existing booking, such as adjusting the start or end date.
-
-### 4. Delete a Booking
+### 3. Delete a Booking
 
 Remove a booking from the system when it's no longer needed.
 
@@ -34,8 +30,7 @@ Remove a booking from the system when it's no longer needed.
 
 ## Global State Management
 
-The application utilizes a global state store to manage the state of bookings. The specific global state management library used is of your choice.
-
+The application utilizes a global state store to manage the state of bookings.
 ## Validation & User Experience
 
 To enhance user experience, the application incorporates logic to prevent double bookings (overlapping reservations). Additionally, the start and end dates for each booking are validated to ensure accuracy.
