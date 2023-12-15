@@ -1,4 +1,3 @@
-import { useHotel } from "../../../hooks/Hotels/useHotels";
 import { useState } from 'react';
 import {
   ContainerFilter,

@@ -1,4 +1,3 @@
-import { BookingDetail } from "../../../../hooks/Bookings/useBookings.types";
 
 export interface ReserveItemProps {
   idReserve: number;
