@@ -6,6 +6,22 @@ Welcome to the React Booking Application! This web application allows users to m
 
 ![Application Preview](docs/home-desktop.png)
 
+## Getting Started
+
+To run the React Booking Application locally, follow these steps:
+
+1. Clone the repository.
+2. Install dependencies using `npm install`.
+3. Start the development server using `npm start`.
+
+## Running Tests
+
+To execute tests for the React Booking Application, you can use the following command:
+
+```bash
+npm test
+```
+
 ## Features
 
 ### 1. Create a Booking
