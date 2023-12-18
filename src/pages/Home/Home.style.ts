@@ -5,7 +5,7 @@ import { COLORS_THEME } from "../../styles/variables";
 export const HeroSlide = styled("div")({
   backgroundImage: `url(${heroSlideImage})`,
   height: "540px",
-  backgroundPosition: "top center",
+  backgroundPosition: "bottom center",
   backgroundSize: "cover",
   padding: "80px 0",
   boxSizing: "border-box",
